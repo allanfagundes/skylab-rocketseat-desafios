@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercicio Final</title>
+</head>
+<body>
+    
+    <section id="print-pokemons">
+        <label for="user">Digite o pokémon desejado</label><br>
+        <input type="text" name="user" id="pokemon">
+        <button id="search-pokemon-button" onclick="searchPokemon(document.getElementById('pokemon').value)">Pesquisar</button>
+
+        <table>
+            <thead>
+                <th>Nome</th>
+                <th>Imagem</th>
+                <th>Stats</th>
+            </thead>
+            <tbody id="pokemon-row">
+
+            </tbody>
+        </table>
+    </section>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="xmlhttprequest.js"></script>
+</body>
+</html>

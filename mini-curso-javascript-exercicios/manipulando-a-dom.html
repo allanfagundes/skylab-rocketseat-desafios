@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manipulando a DOM</title>
+    <style>
+        .d-flex{
+            display: flex;
+        }
+        .flex-wrap{
+            flex-wrap: wrap;
+        }
+        .margin-15{
+            margin: 15px;
+        }
+    </style>
+</head>
+<body>
+    <section class="exercise-one exercise-two">
+        <button id="add-new-square">Add new square</button>
+        <div class="exercise-one__container d-flex flex-wrap"></div>
+    </section>
+    <section id="exercise-three">
+
+    </section>
+    <section id="exercise-four">
+        <div>
+            <input type="text" name="nome" id="name">
+            <button onClick="exerciseFour(document.getElementById('name').value)">Adicionar</button>
+        </div>
+    </section>
+
+    <script>
+        // 1º exercício - Crie um botão que ao ser clicado cria um novo elemento em tela com a forma de um quadrado vermelho com 100px de altura e largura. Sempre que o botão for clicado um novo quadrado deve aparecer na tela.
+        
+        const buttonAddNewSquare = document.getElementById('add-new-square')
+        const containerExerciseOne = document.querySelector('.exercise-one__container')
+
+        buttonAddNewSquare.addEventListener('click', function exerciseOne() {
+          
+            // let howManyChild = containerExerciseOne.childElementCount
+
+            let square = document.createElement('div')
+            square.classList.add('square')
+            square.classList.add('margin-15')
+            square.style.width = '100px'
+            square.style.height = '100px'
+            square.style.backgroundColor = 'red'
+
+            containerExerciseOne.appendChild(square)
+        })
+
+        // 2º exercício - Utilizando o resultado do primeiro desafio, toda vez que o usuário passar o mouse por cima de algum quadrado troque sua cor para uma cor aleatória gerada pela função abaixo:
+        function getRandomColor() {
+            const letters = "0123456789ABCDEF";
+            let color = "#";
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        
+        var newColor = getRandomColor();
+        
+        const elementToHover = document.getElementsByClassName('square')
+
+        document.body.addEventListener("mouseover", function (e) {
+            if (e.target && e.target.classList.contains("square")) {
+                for (let i = 0; i < elementToHover.length; i++) {
+                    elementToHover[i].style.backgroundColor = newColor
+                }
+            }
+        });
+
+        document.body.addEventListener("mouseout", function (e) {
+            if (e.target && e.target.classList.contains("square")) {
+                for (let i = 0; i < elementToHover.length; i++) {
+                    elementToHover[i].style.backgroundColor = 'red'
+                }
+            }
+        });
+
+        // 3º exercício - A partir do seguinte vetor:
+        // var nomes = ["Diego", "Gabriel", "Lucas"];
+        // Preencha uma lista ( <ul> ) no HTML com os itens da seguinte forma:
+        // ● Diego
+        // ● Gabriel
+        // ● Lucas
+
+        const containerExerciseThree = document.getElementById('exercise-three')
+        
+        function exerciseThree(nomes) {
+            
+            let ulList = document.createElement('ul')
+            ulList.classList.add('ul-list')
+            containerExerciseThree.appendChild(ulList)
+
+            for (const nome of nomes) {
+                console.log(nome)
+
+                let listItem = document.createElement('li')
+                listItem.innerText = nome
+
+                ulList.appendChild(listItem);
+            }
+
+
+        }
+
+        const nomes = ["Diego", "Gabriel", "Lucas"];
+        exerciseThree(nomes)
+
+        // 4º exercício - Seguindo o resultado do exercício anterior adicione um input em tela e um botão como a seguir:
+        // <input type="text" name="nome">
+        // <button onClick="adicionar()">Adicionar</button>
+        // Ao clicar no botão, a função adicionar() deve ser disparada adicionando um novo item a lista de nomes baseado no nome preenchido no input e renderizando o novo item em tela juntos aos demais itens anteriores. Além disso, o conteúdo do input deve ser apagado após o clique.
+        function exerciseFour(nome) {
+            let listItem = document.createElement('li')
+            let inputName = document.getElementById('name')
+            
+            listItem.innerText = nome
+            document.querySelector('.ul-list').appendChild(listItem)
+            inputName.value = ''
+
+        }
+
+        // Site com manipulações de Javascript
+        // https://www.sitepoint.com/dom-manipulation-vanilla-javascript-no-jquery/
+    </script>
+</body>
+</html>
