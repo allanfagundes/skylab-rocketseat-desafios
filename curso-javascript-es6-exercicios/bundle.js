@@ -1,5 +1,13 @@
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -61,10 +69,8 @@ var Admin = /*#__PURE__*/function (_Usuario) {
 }(Usuario);
 
 var User1 = new Usuario('email@teste.com', 'senha123');
-var Adm1 = new Admin('email@teste.com', 'senha123');
-console.log(User1.isAdmin()); // false
-
-console.log(Adm1.isAdmin()); // true
+var Adm1 = new Admin('email@teste.com', 'senha123'); // console.log(User1.isAdmin()) // false
+// console.log(Adm1.isAdmin()) // true
 // 2º exercício - A partir do seguinte vetor e utilizando os métodos de array (map, reduce, filter e find):
 // const usuarios = [
 //     { nome: 'Diego', idade: 23, empresa: 'Rocketseat' },
@@ -101,18 +107,18 @@ var usuarios = [{
 
 var age = usuarios.map(function (a) {
   return a.idade;
-});
-console.log(age); // FILTER
+}); // console.log(age)
+// FILTER
 
 var rocketseatEmployee = usuarios.filter(function (e) {
   return e.nome == 'Diego' && e.empresa == 'Rocketseat';
-});
-console.log(rocketseatEmployee); // FIND
+}); // console.log(rocketseatEmployee)
+// FIND
 
 var googleEmployee = usuarios.find(function (e) {
   return e.empresa == 'Google';
-});
-console.log(googleEmployee); // MAP and FILTER
+}); // console.log(googleEmployee)
+// MAP and FILTER
 
 var under50 = usuarios.map(function (u) {
   return _objectSpread({}, u, {
@@ -120,8 +126,8 @@ var under50 = usuarios.map(function (u) {
   });
 }).filter(function (i) {
   return i.idade <= 50;
-});
-console.log(under50); // 3º exercício - Converta as funções nos seguintes trechos de código em Arrow Functions:
+}); // console.log(under50)
+// 3º exercício - Converta as funções nos seguintes trechos de código em Arrow Functions:
 // 3.1
 // Antes
 // const arr = [1, 2, 3, 4, 5];
@@ -133,8 +139,8 @@ console.log(under50); // 3º exercício - Converta as funções nos seguintes tr
 var arr = [1, 2, 3, 4, 5];
 var newArr = arr.map(function (item) {
   return item + 10;
-});
-console.log(newArr); // 3.2
+}); // console.log(newArr)
+// 3.2
 // Dica: Utilize uma constante pra function
 // Antes
 // const usuario = { nome: 'Diego', idade: 23 };
@@ -155,8 +161,8 @@ var mostraIdade = function mostraIdade() {
   };
 };
 
-mostraIdade(usuario2);
-console.log(usuario2); // 3.3
+mostraIdade(usuario2); // console.log(usuario2)
+// 3.3
 // Dica: Utilize uma constante pra function
 // Antes
 // const nome = "Diego";
@@ -178,13 +184,110 @@ var mostraUsuario = function mostraUsuario() {
     nome: nome,
     idade: idade
   };
-};
+}; // mostraUsuario(nome, idade);
+// mostraUsuario(nome);
+// 3.4
 
-mostraUsuario(nome, idade);
-mostraUsuario(nome); // 3.4
 
 var promise = function promise() {
   return new Promise(resolve, function (reject) {
     return resolve();
   });
+}; // 4.1 Desestruturação simples - A partir do seguinte objeto:
+
+
+var empresa = {
+  empresa_nome: 'Rocketseat',
+  empresa_endereco: {
+    empresa_cidade: 'Rio do Sul',
+    empresa_estado: 'SC'
+  }
+}; // Utilize a desestruturação para transformar as propriedades nome, cidade e estado em variáveis, no fim deve ser possível fazer o seguinte:
+
+var empresa_nome = empresa.empresa_nome,
+    empresa_cidade = empresa.empresa_endereco.empresa_cidade,
+    empresa_estado = empresa.empresa_endereco.empresa_estado; // console.log(empresa_nome); // Rocketseat
+// console.log(empresa_cidade); // Rio do Sul
+// console.log(empresa_estado); // SC
+// 4.2 Desestruturação em parâmetros na seguinte função:
+
+function mostraInfo(usuario) {
+  var nome = usuario.nome,
+      idade = usuario.idade; // console.log(`${nome} tem ${idade} anos.`)
+
+  return "".concat(nome, " tem ").concat(idade, " anos.");
+}
+
+mostraInfo({
+  nome: 'Diego',
+  idade: 23
+}); // Utilize a desestruturação nos parâmetros da função para buscar o nome e idade do usuário separadamente e a função poder retornar apenas:
+// return `${nome} tem ${idade} anos.`;
+// 5º Exercício - Utilizando o operador de rest/spread ( ... ) realize as seguintes operações:
+// 5.1 Rest - A partir do array: const arr = [1, 2, 3, 4, 5, 6] , defina uma variável x que recebe a primeira posição do vetor e outra variável y que recebe todo restante dos dados.
+
+var arrayRest = [1, 2, 3, 4, 5, 6];
+var firstArrItem = arrayRest[0];
+
+var restArrItem = _toConsumableArray(arrayRest.slice(1)); // console.log(firstArrItem); // 1
+// console.log(restArrItem); // [2, 3, 4, 5, 6]
+// Crie uma função que recebe inúmeros parâmetros e retorna a soma de todos eles:
+// function soma...
+
+
+var soma = function soma() {
+  var sum = 0;
+
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  for (var _i = 0, _args = args; _i < _args.length; _i++) {
+    var arg = _args[_i];
+    sum += arg;
+  }
+
+  return sum;
+}; // console.log(soma(1, 2, 3, 4, 5, 6)); // 21
+// console.log(soma(1, 2)); // 3
+// 5.2 Spread
+// A partir do objeto e utilizando o operador spread:
+
+
+var usuarioSpread = {
+  nome: 'Diego',
+  idade: 23,
+  endereco: {
+    cidade: 'Rio do Sul',
+    uf: 'SC',
+    pais: 'Brasil'
+  }
+};
+
+var usuarioSpread2 = _objectSpread({}, usuarioSpread, {
+  nome: 'Gabriel'
+});
+
+var usuarioSpread3 = _objectSpread({}, usuarioSpread, {
+  endereco: _objectSpread({}, usuarioSpread.endereco, {
+    cidade: 'Lontras'
+  })
+}); // console.log(usuarioSpread2)
+// console.log(usuarioSpread3)
+// Crie uma variável usuario2 que contenha todos os dados do usuário porém com nome Gabriel .
+// Crie uma variável usuario3 que contenha todos os dados do usuário porém com cidade Lontras .
+// 6º Exercício
+// Converta o seguinte trecho de código utilizando Template Literals:
+
+
+var usuario6 = 'Diego';
+var idade6 = 23;
+console.log("O usu\xE1rio ".concat(usuario6, " possui ").concat(idade6, " anos")); // 7º Exercício
+// Utilize a sintaxe curta de objetos (Object Short Syntax) no seguinte objeto:const nome = 'Diego';
+
+var idade7 = 23;
+var usuario7 = {
+  nome: nome,
+  idade: idade7,
+  cidade: 'Rio do Sul'
 };

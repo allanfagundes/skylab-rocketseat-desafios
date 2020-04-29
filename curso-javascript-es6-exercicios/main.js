@@ -22,8 +22,8 @@ class Admin extends Usuario {
 
 const User1 = new Usuario('email@teste.com', 'senha123');
 const Adm1 = new Admin('email@teste.com', 'senha123');
-console.log(User1.isAdmin()) // false
-console.log(Adm1.isAdmin()) // true
+// console.log(User1.isAdmin()) // false
+// console.log(Adm1.isAdmin()) // true
 
 // 2º exercício - A partir do seguinte vetor e utilizando os métodos de array (map, reduce, filter e find):
 
@@ -61,19 +61,19 @@ const usuarios = [
 
 // MAP
 const age = usuarios.map(a => a.idade)
-console.log(age)
+// console.log(age)
 
 // FILTER
 const rocketseatEmployee = usuarios.filter(e => e.nome == 'Diego' && e.empresa == 'Rocketseat')
-console.log(rocketseatEmployee)
+// console.log(rocketseatEmployee)
 
 // FIND
 const googleEmployee = usuarios.find(e => e.empresa == 'Google')
-console.log(googleEmployee)
+// console.log(googleEmployee)
 
 // MAP and FILTER
 const under50 = usuarios.map(u => ({...u, idade: u.idade * 2})).filter(i => i.idade <= 50)
-console.log(under50)
+// console.log(under50)
 
 
 // 3º exercício - Converta as funções nos seguintes trechos de código em Arrow Functions:
@@ -89,7 +89,7 @@ console.log(under50)
 // Depois
 const arr = [1, 2, 3, 4, 5];
 const newArr = arr.map(item => item + 10)
-console.log(newArr)
+// console.log(newArr)
 
 // 3.2
 // Dica: Utilize uma constante pra function
@@ -103,7 +103,8 @@ console.log(newArr)
 const usuario2 = { nome: 'Diego', idade: 23 }
 const mostraIdade = () => u => u.idade
 mostraIdade(usuario2);
-console.log(usuario2)
+
+// console.log(usuario2)
 
 // 3.3
 // Dica: Utilize uma constante pra function
@@ -119,10 +120,112 @@ console.log(usuario2)
 const nome = "Diego";
 const idade = 23;
 const mostraUsuario = (nome = 'Diego', idade = 18) => ({nome, idade })
-mostraUsuario(nome, idade);
-mostraUsuario(nome);
+
+// mostraUsuario(nome, idade);
+// mostraUsuario(nome);
 
 // 3.4
 const promise = function() {
     return new Promise(resolve, reject => resolve())
 }
+
+// 4.1 Desestruturação simples - A partir do seguinte objeto:
+
+const empresa = {
+    empresa_nome: 'Rocketseat',
+    empresa_endereco: {
+    empresa_cidade: 'Rio do Sul',
+    empresa_estado: 'SC',
+    }
+};
+
+// Utilize a desestruturação para transformar as propriedades nome, cidade e estado em variáveis, no fim deve ser possível fazer o seguinte:
+
+const { empresa_nome, empresa_endereco: {empresa_cidade}, empresa_endereco: {empresa_estado}} = empresa
+
+// console.log(empresa_nome); // Rocketseat
+// console.log(empresa_cidade); // Rio do Sul
+// console.log(empresa_estado); // SC
+
+// 4.2 Desestruturação em parâmetros na seguinte função:
+
+function mostraInfo(usuario) {
+    const { nome, idade } = usuario
+    
+    // console.log(`${nome} tem ${idade} anos.`)
+    return `${nome} tem ${idade} anos.`;
+}
+
+mostraInfo({ nome: 'Diego', idade: 23 })
+
+// Utilize a desestruturação nos parâmetros da função para buscar o nome e idade do usuário separadamente e a função poder retornar apenas:
+
+// return `${nome} tem ${idade} anos.`;
+
+// 5º Exercício - Utilizando o operador de rest/spread ( ... ) realize as seguintes operações:
+
+// 5.1 Rest - A partir do array: const arr = [1, 2, 3, 4, 5, 6] , defina uma variável x que recebe a primeira posição do vetor e outra variável y que recebe todo restante dos dados.
+
+const arrayRest = [1, 2, 3, 4, 5, 6]
+
+const firstArrItem = arrayRest[0]
+const restArrItem = [...arrayRest.slice(1)]
+
+// console.log(firstArrItem); // 1
+// console.log(restArrItem); // [2, 3, 4, 5, 6]
+
+// Crie uma função que recebe inúmeros parâmetros e retorna a soma de todos eles:
+
+// function soma...
+const soma = (...args) => {
+    let sum = 0;
+
+    for (let arg of args) sum += arg;
+
+    return sum
+}
+
+// console.log(soma(1, 2, 3, 4, 5, 6)); // 21
+// console.log(soma(1, 2)); // 3
+
+
+// 5.2 Spread
+// A partir do objeto e utilizando o operador spread:
+
+const usuarioSpread = {
+    nome: 'Diego',
+    idade: 23,
+    endereco: {
+        cidade: 'Rio do Sul',
+        uf: 'SC',
+        pais: 'Brasil',
+    }
+};
+
+const usuarioSpread2 = { ...usuarioSpread, nome: 'Gabriel' }
+const usuarioSpread3 = { ...usuarioSpread, endereco: { ...usuarioSpread.endereco, cidade: 'Lontras'}}
+
+// console.log(usuarioSpread2)
+// console.log(usuarioSpread3)
+
+// Crie uma variável usuario2 que contenha todos os dados do usuário porém com nome Gabriel .
+// Crie uma variável usuario3 que contenha todos os dados do usuário porém com cidade Lontras .
+
+
+// 6º Exercício
+// Converta o seguinte trecho de código utilizando Template Literals:
+
+const usuario6 = 'Diego';
+const idade6 = 23;
+console.log(`O usuário ${usuario6} possui ${idade6} anos`);
+
+// 7º Exercício
+// Utilize a sintaxe curta de objetos (Object Short Syntax) no seguinte objeto:const nome = 'Diego';
+
+const idade7 = 23;
+
+const usuario7 = {
+    nome,
+    idade: idade7,
+    cidade: 'Rio do Sul',
+};
